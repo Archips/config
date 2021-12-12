@@ -33,7 +33,7 @@ elif [[ "$OSTYPE" == "linux"* ]]; then
     alias ls="ls --color=auto"
     alias la="ls --color=auto -lah"
     if type setxkbmap &> /dev/null; then    # swap Ctrl and Capslock
-        setxkbmap -option 'ctrl:swapcaps'
+        setxkbmap -option 'ctrl:swapcaps'   # ctrl:nocaps  (pour avoir 2 touches ctrl right)
     fi
 fi
 
