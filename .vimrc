@@ -7,6 +7,8 @@ filetype plugin indent on           "   filetype, plugin, indent auto-detect
 syntax on
 set bg=dark
 
+set nu
+
 "   ERGONOMIC
 set ignorecase smartcase            "   ignore case except if uppercase used
 set listchars=tab:>\ ,trail:-       "   strings to use for :list command

@@ -1,4 +1,3 @@
 #!/bin/bash
-ln -s $HOME/Documents/mini-conf/.vimrc $HOME/.vimrc
-ln -s $HOME/Documents/mini-conf/.zshrc $HOME/.zshrc
-ln -s $HOME/Documents/mini-conf/.tmux.conf $HOME/.tmux.conf
+ln -sv $HOME/Documents/config/.vimrc $HOME/.vimrc ln -sv $HOME/Documents/config/.zshrc $HOME/.zshrc
+ln -sv $HOME/Documents/config/.tmux.conf $HOME/.tmux.conf
