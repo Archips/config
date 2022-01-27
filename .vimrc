@@ -9,6 +9,8 @@ set bg=dark
 
 set nu
 
+set mouse=a
+
 "   ERGONOMIC
 set ignorecase smartcase            "   ignore case except if uppercase used
 set listchars=tab:>\ ,trail:-       "   strings to use for :list command
@@ -26,6 +28,7 @@ set spellfile=$DOTVIM/spell/custom.utf-8.add
 "   INDENTATION
 set autoindent                      "   auto indent
 set shiftround                      "   indent to the nearest tab mark
+set expandtab						"	replace tabs with spaces
 set shiftwidth=4 tabstop=4          "   shift and tab width in spaces
 
 "   PERFORMANCE
@@ -52,11 +55,11 @@ set undofile                                "   enable undofiles
 set viminfo+='100,<50,s10,h,n$DOTVIM/.viminfo " viminfo location
 
 "                       C OPTIONS
-au FileType c setl cindent tw=80
-au FileType c setl syntax=off
+au FileType c,cpp setl noexpandtab cindent tw=80
+au FileType c,cpp setl syntax=off
 
 
-"                       MAPPINGS
+"                       MAPPINGS"
 nn se :e *
 nn ss :b#<CR>
 nn sb :ls<CR>:b<Space>
@@ -70,5 +73,11 @@ nn glhl :set hlsearch!<CR>
 nn glli :set list!<CR>
 "   source vimrc
 nn glso :silent write\|source $MYVIMRC\|e<CR>zR
-
 no ; :
+" syntax on
+
+"                       PLUGINS
+
+call plug#begin('~/.vim/.plugged')
+Plug 'tpope/vim-commentary'
+call plug#end()
