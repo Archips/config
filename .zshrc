@@ -4,6 +4,7 @@ fi
 
 #   vim
 export DOTVIM=$HOME/.vim
+export NOTES=$HOME/git/Notes
 bindkey -v                                                          # enable vim keybinding ( $ bindkey -l )
 export EDITOR=vim
 export KEYTIMEOUT=1                                                 # 10ms vi MODES transition

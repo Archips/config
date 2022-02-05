@@ -29,10 +29,7 @@ set spellfile=$DOTVIM/spell/custom.utf-8.add
 set autoindent                      "   auto indent
 set shiftround                      "   indent to the nearest tab mark
 set expandtab						"	replace tabs with spaces
-set shiftwidth=4 tabstop=4          "   shift and tab width in spaces
-
-"   PERFORMANCE
-set lazyredraw                      "   increase macro fluidity
+set shiftwidth=4 tabstop=4          "   shift and tab width in spaces "   PERFORMANCE set lazyredraw                      "   increase macro fluidity
 set ttimeoutlen=0                   "   mapping and keycode delays (fix esc)
 
 "   SECURITY
@@ -54,21 +51,46 @@ set undodir=$DOTVIM/.undo/,/tmp//           "   undo files directory
 set undofile                                "   enable undofiles
 set viminfo+='100,<50,s10,h,n$DOTVIM/.viminfo " viminfo location
 
-"                       C OPTIONS
+"                       FILETYPE OPTIONS
+"       MD
+au BufRead,BufNewFile *.md
+            \   set filetype=notes
+            \ | setl textwidth=70
+            \ | setl suffixesadd+=.md
+            \ | setl expandtab
+"   NOTES_NAV
+au BufRead,BufNewFile *.md nn <silent><buffer> <Space><Tab> :silent lc %:h\|write<CR>gogf
+au BufRead,BufNewFile *.md nn <silent><buffer> <Space><CR> mm:silent lc %:h\|write<CR>`m0gf5G
+"   INDEX_GEN
+au BufRead,BufNewFile *.md nn <silent><buffer> <Space># :silent
+            \
+            \ let @a=""\|g/^##/y A<CR>3G/#<CR>2kpo#INDEX<CR>------<Esc>0k
+"   INDEX_NAV
+au BufRead,BufNewFile *.md nn <silent><buffer> <Space>3 /<C-R>=getline('.')<CR>$<CR>zt
+
+"   GREP
+au BufRead,BufNewFile *.md com! -nargs=+ Grep exec 'grep! -i <args> $NOTES/*.md' | cw
+"       C
 au FileType c,cpp setl noexpandtab cindent tw=80
 au FileType c,cpp setl syntax=off
-"                       PYTHON OPTIONS
+"       PYTHON
 au FileType python nn <buffer> <Space>5 :w\|lc %:h<CR>
             \:!clear; /usr/bin/python3 main.py<CR>
 
 
 "                       MAPPINGS"
+" saute dans l'index de mes notes
+nn <Space>I :e $NOTES/Index.md<CR>gi<Esc>
+" edit un fichier du current dir (ecris trois lettres et press tab)
 nn se :e *
+" retourne dans le buffer precedent
 nn ss :b#<CR>
+" liste les buffer ouverts pour sauter dedans
 nn sb :ls<CR>:b<Space>
+" delete current buffer
 nn sd :bn\|bd#<CR>
 
-no <space>= mmgo=G`mzz
+nn <Space>= Mmmgo=G`mzz3<C-O>
 no <space>w <C-w>
 no s <nop>
 
