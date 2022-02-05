@@ -57,6 +57,9 @@ set viminfo+='100,<50,s10,h,n$DOTVIM/.viminfo " viminfo location
 "                       C OPTIONS
 au FileType c,cpp setl noexpandtab cindent tw=80
 au FileType c,cpp setl syntax=off
+"                       PYTHON OPTIONS
+au FileType python nn <buffer> <Space>5 :w\|lc %:h<CR>
+            \:!clear; /usr/bin/python3 main.py<CR>
 
 
 "                       MAPPINGS"
@@ -65,6 +68,7 @@ nn ss :b#<CR>
 nn sb :ls<CR>:b<Space>
 nn sd :bn\|bd#<CR>
 
+no <space>= mmgo=G`mzz
 no <space>w <C-w>
 no s <nop>
 

@@ -32,9 +32,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then       # enable ls colors
 elif [[ "$OSTYPE" == "linux"* ]]; then
     alias ls="ls --color=auto"
     alias la="ls --color=auto -lah"
-    if type setxkbmap &> /dev/null; then    # swap Ctrl and Capslock
-        setxkbmap -option 'ctrl:swapcaps'   # ctrl:nocaps  (pour avoir 2 touches ctrl right)
-    fi
 fi
 
 alias grep='grep --color=auto'              # enable grep colors
@@ -52,3 +49,6 @@ alias gr="git reset"
 alias gl="git log"
 alias gd="git diff"
 alias gp="git push"
+
+#   path
+export PATH=$PATH:"/mnt/nfs/homes/$USER/.local/bin"
