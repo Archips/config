@@ -2,6 +2,9 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
     exec tmux
 fi
 
+#   path
+export PATH=$PATH:"/mnt/nfs/homes/$USER/.local/bin"
+
 #   vim
 export DOTVIM=$HOME/.vim
 export NOTES=$HOME/git/Notes
@@ -26,6 +29,9 @@ export HISTFILE=$HOME/.zsh_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
+setopt PROMPT_SUBST
+PROMPT='%n@%m: ${(%):-%~} '
+
 #   aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then       # enable ls colors
     alias ls="ls -G"
@@ -35,6 +41,7 @@ elif [[ "$OSTYPE" == "linux"* ]]; then
     alias la="ls --color=auto -lah"
 fi
 
+# alias prompt="setopt PROMPT_SUBST && PROMPT='%n@%m: ${(%):-%~} '"
 alias grep='grep --color=auto'              # enable grep colors
 alias vi='vim'
 
@@ -51,5 +58,4 @@ alias gl="git log"
 alias gd="git diff"
 alias gp="git push"
 
-#   path
-export PATH=$PATH:"/mnt/nfs/homes/$USER/.local/bin"
+export PATH="$HOME/.poetry/bin:$PATH"

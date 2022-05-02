@@ -9,8 +9,6 @@ set bg=dark
 
 set nu
 
-set mouse=a
-
 "   ERGONOMIC
 set ignorecase smartcase            "   ignore case except if uppercase used
 set listchars=tab:>\ ,trail:-       "   strings to use for :list command
@@ -73,6 +71,7 @@ au BufRead,BufNewFile *.md com! -nargs=+ Grep exec 'grep! -i <args> $NOTES/*.md'
 "       C
 au FileType c,cpp setl noexpandtab cindent tw=80
 au FileType c,cpp setl syntax=off
+au FileType c,cpp syn match Comment "\/\/.*$\|\/\*\_.\{-}\*\/"
 "       PYTHON
 au FileType python nn <buffer> <Space>5 :w\|lc %:h<CR>
             \:!clear; /usr/bin/python3 main.py<CR>
@@ -94,7 +93,10 @@ nn <Space>= Mmmgo=G`mzz3<C-O>
 no <space>w <C-w>
 no s <nop>
 
+"   toggle hilight search
 nn glhl :set hlsearch!<CR>
+"   toggle cursor line
+nn glcl :set cursorline!<CR>
 "   toggle invisible chars
 nn glli :set list!<CR>
 "   source vimrc
