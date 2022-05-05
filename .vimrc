@@ -71,7 +71,12 @@ au BufRead,BufNewFile *.md com! -nargs=+ Grep exec 'grep! -i <args> $NOTES/*.md'
 "       C
 au FileType c,cpp setl noexpandtab cindent tw=80
 au FileType c,cpp setl syntax=off
-au FileType c,cpp syn match Comment "\/\/.*$\|\/\*\_.\{-}\*\/"
+au FileType c,cpp syn match Todo "TODO" contained
+au FileType c,cpp syn match Comment "\/\/.*$\|\/\*.*\*\/\|\/\*\|^\ \*\*.*$\|\*\/" contains=Todo
+au FileType c,cpp syn match Silence "\/\*.*\*\/" contains=Todo
+au FileType c,cpp syn match Printf ".*print.*" contains=Silence,Comment
+au FileType c,cpp hi link Printf MoreMsg
+au FileType c,cpp hi link Silence NonText
 "       PYTHON
 au FileType python nn <buffer> <Space>5 :w\|lc %:h<CR>
             \:!clear; /usr/bin/python3 main.py<CR>
